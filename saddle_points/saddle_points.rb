@@ -27,15 +27,19 @@ class Matrix
   def find_saddle_points(rows, columns)
     saddle_points = []
     rows.each_with_index do |row, row_index|
-      row_max = row.max
-      column_indices_with_highest_value_in_row = []
-      row.each_with_index do |number, index|
-        column_indices_with_highest_value_in_row << index if number == row_max
-      end
-      column_indices_with_highest_value_in_row.each do |column_index|
+      column_indices_with_highest_value_in_row(row).each do |column_index|
         saddle_points << [row_index, column_index] if row[column_index] == columns[column_index].min
       end
     end
     saddle_points
+  end
+
+  def column_indices_with_highest_value_in_row(row)
+    row_max = row.max
+    column_indices_with_highest_value_in_row = []
+    row.each_with_index do |number, index|
+      column_indices_with_highest_value_in_row << index if number == row_max
+    end
+    column_indices_with_highest_value_in_row
   end
 end
